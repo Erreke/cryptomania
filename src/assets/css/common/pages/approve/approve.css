@@ -1,0 +1,33 @@
+.approve__gamers-loading {
+    margin: 0;
+    text-align: center;
+    line-height: 24px;
+}
+.approve__gamers-loading-img {
+    display: inline-block;
+    margin-right: 10px;
+    width: 24px;
+    height: 24px;
+    background: 0 0 no-repeat;
+    background-image: url(../assets/i/blocks/loader/loader_type_table.gif);
+    vertical-align: top;
+}
+.approve__no-gamers {
+    margin: 0;
+}
+.btn.approve__btn-rounded {
+    padding-right: 8px;
+    padding-left: 8px;
+}
+.approve__avatar {
+    float: left;
+    margin-right: 10px;
+    border-radius: 50%;
+}
+.approve__accordion .panel-heading {
+    padding: 0;
+}
+.approve__accordion .panel-title a {
+    display: block;
+    padding: 20px 20px 20px 20px;
+}

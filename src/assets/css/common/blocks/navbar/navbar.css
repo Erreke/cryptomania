@@ -1,0 +1,13 @@
+.navbar__logo {
+    display: block;
+    margin: 0 auto;
+}
+.navbar__logo-small {
+    display: none;
+}
+.small-sidebar .navbar__logo {
+    display: none;
+}
+.small-sidebar .navbar__logo-small {
+    display: block;
+}

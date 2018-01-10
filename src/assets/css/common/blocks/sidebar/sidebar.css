@@ -1,0 +1,40 @@
+.sidebar__team,
+.sidebar:hover .sidebar__team {
+    width: 40px;
+    height: 40px;
+    background: 0 0 no-repeat;
+    background-image: url(../assets/i/blocks/sidebar/sidebar__team.svg);
+}
+.menu.accordion-menu > li > a:hover .sidebar__team,
+.small-sidebar .sidebar:hover .menu.accordion-menu > li > a:hover .sidebar__team {
+    background-image: url(../assets/i/blocks/sidebar/sidebar__team-hover.svg);
+}
+.small-sidebar .sidebar__team {
+    width: 22px;
+    height: 22px;
+    background: 0 0 no-repeat;
+    background-image: url(../assets/i/blocks/sidebar/sidebar__team-small.svg);
+}
+.small-sidebar .menu.accordion-menu > li > a:hover .sidebar__team {
+    background-image: url(../assets/i/blocks/sidebar/sidebar__team-small-hover.svg);
+}
+.sidebar__community,
+.sidebar:hover .sidebar__community {
+    width: 40px;
+    height: 40px;
+    background: 0 0 no-repeat;
+    background-image: url(../assets/i/blocks/sidebar/sidebar__community.svg);
+}
+.menu.accordion-menu > li > a:hover .sidebar__community,
+.small-sidebar .sidebar:hover .menu.accordion-menu > li > a:hover .sidebar__community {
+    background-image: url(../assets/i/blocks/sidebar/sidebar__community-hover.svg);
+}
+.small-sidebar .sidebar__community {
+    width: 20px;
+    height: 20px;
+    background: 0 0 no-repeat;
+    background-image: url(../assets/i/blocks/sidebar/sidebar__community-small.svg);
+}
+.small-sidebar .menu.accordion-menu > li > a:hover .sidebar__community {
+    background-image: url(../assets/i/blocks/sidebar/sidebar__community-small-hover.svg);
+}

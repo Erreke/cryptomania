@@ -1,0 +1,30 @@
+.winners__avatar {
+    margin-right: 10px;
+    border-radius: 50%;
+}
+.winners__container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.winner {
+    margin: 0 5px 10px;
+    flex: 1 0 232px;
+}
+.winners__data {
+    margin: 0;
+}
+.winner__content {
+    display: flex;
+    padding-right: 75px;
+    align-items: center;
+}
+.winner__content::after {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 45px;
+    height: 50px;
+    background: 0 0 no-repeat;
+    background-image: url(../assets/i/pages/winners/winner-cup.svg);
+}
