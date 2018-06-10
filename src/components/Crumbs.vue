@@ -28,7 +28,7 @@
 
                 return [
                     {
-                        name: 'LevelOnePage',
+                        name: 'EducationFirstLevelPage',
                         title: 'Главная'
                     },
                     ...chains

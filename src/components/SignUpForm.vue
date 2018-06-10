@@ -1,102 +1,74 @@
 <template>
-    <form class="m-t-md" @submit.prevent="handleSubmit">
-        <div class="form-group">
-            <label for="email">E-Mail:</label>
-            <input type="email" class="form-control mt1" name="email" id="email" placeholder="Укажи адрес электронной почты" v-model="email">
-        </div>
+  <form class="m-t-md" @submit.prevent="handleSubmit">
+    <div class="form-group">
+      <label for="sign-up-email">E-Mail:</label>
+      <input type="email" class="form-control mt1" name="email" id="sign-up-email"
+             placeholder="Укажи адрес электронной почты" v-model="email" autocomplete="email" required>
+    </div>
 
-        <div class="form-group">
-            <label for="password">Пароль:</label>
-            <input type="password" class="form-control mt1" name="password" id="password" placeholder="Придумай пароль" v-model="password">
-        </div>
+    <div class="form-group">
+      <label for="sign-up-password">Пароль:</label>
+      <input type="password" class="form-control mt1" name="password" id="sign-up-password"
+             placeholder="Придумай пароль" v-model="password" autocomplete="new-password" required>
+    </div>
 
-        <input type="hidden" class="form-control" name="mentor_id" v-model="mentorId">
+    <div class="form-group" v-if="signUpError">
+      <p class="text-danger">{{ signUpError }}</p>
+    </div>
 
-        <div class="form-group">
-            <button type="submit" :class="{'btn btn-success btn-block': true, 'ajax-loading': isRegistrationProcess}">Регистрация</button>
-        </div>
+    <input type="hidden" class="form-control" name="mentor_id" v-model="mentorId">
 
-        <hr>
+    <div class="form-group">
+      <button type="submit" :class="{'btn btn-success btn-block': true, 'ajax-loading': isSignUpProcess}">
+        Регистрация
+      </button>
+    </div>
 
-        <div class="form-group">
-            <h4 class="text-center">Уже участвуешь в проекте?</h4>
-            <router-link :to="{ name: 'SignInPage' }" class="btn btn-primary btn-block m-t-xs">Войди в свой профиль
-            </router-link>
-        </div>
-    </form>
+    <hr>
+
+    <div class="form-group">
+      <h4 class="text-center">Уже участвуешь в проекте?</h4>
+      <router-link :to="{ name: 'SignInPage' }" class="btn btn-primary btn-block m-t-xs">Войди в свой профиль
+      </router-link>
+    </div>
+  </form>
 </template>
 
 
 <script>
-    import firebase from 'firebase';
-    import {mapGetters} from 'vuex';
-    import {showErrors} from './SweetAlerts';
+  import { mapState, mapActions } from 'vuex';
 
-    export default {
-        name: 'sign-up-form',
-        data() {
-            return {
-                email: '',
-                password: '',
-                mentorId: '',
-            }
-        },
-        computed: mapGetters([
-            'isRegistrationProcess'
-        ]),
-        methods: {
-            handleSubmit() {
-                this.$store.commit('SET_REGISTRATION_PROCESS', true);
+  export default {
+    name: 'sign-up-form',
 
-                firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
-                    .then(() => {
-                        this.$store.commit('SET_REGISTRATION_PROCESS', false);
-                        this.$router.push({name: 'LevelOnePage'})
+    data() {
+      return {
+        email: '',
+        password: '',
+        mentorId: '',
+      }
+    },
 
-                    })
-                    .catch((error) => {
-                        this.$store.commit('SET_REGISTRATION_PROCESS', false);
+    computed: {
+      ...mapState({
+        isSignUpProcess: state => state.auth.isSignUpProcess,
+        signUpError: state => state.auth.signUpError,
+      }),
+    },
 
-                        switch (error.code) {
-
-                            case 'auth/email-already-in-use':
-                                showErrors(this, 'Пользователь с такой электронной почтой уже зарегистрирован...');
-                                break;
-
-                            case 'auth/invalid-email':
-                                showErrors(this, 'Не правильный адрес электронной почты...');
-                                break;
-
-                            case 'auth/operation-not-allowed':
-                                showErrors(this, 'Операция недоступна...');
-                                break;
-
-                            case 'auth/weak-password':
-                                showErrors(this, 'Очень слабый пароль...');
-                                break;
-
-                            default:
-                                showErrors(this, 'Произошла неизвестная ошибка...');
-                                break;
-                        }
-                    });
-            },
-            _signUpByProvider() {
-                let provider = new firebase.auth.GoogleAuthProvider();
-                //var provider = new firebase.auth.FacebookAuthProvider();
-                //var provider = new firebase.auth.TwitterAuthProvider();
-
-
-                firebase.auth().currentUser.linkWithPopup(provider).then(function(result) {
-
-                    console.log(result);
-
-                }).catch(function(error) {
-
-                    console.log(error);
-
-                });
-            }
-        }
+    methods: {
+      ...mapActions({
+        signUpRequest: 'SIGN_UP_REQUEST',
+      }),
+      handleSubmit() {
+        this.signUpRequest({
+          email: this.email,
+          password: this.password
+        })
+          .then(() => {
+            this.$router.push({name: 'EducationFirstLevelPage'});
+          });
+      }
     }
+  }
 </script>

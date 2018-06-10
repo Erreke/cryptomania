@@ -1,56 +1,12 @@
 <template>
-    <div :class="{
-        'page page-header-fixed page-sidebar-fixed': true,
-        'small-sidebar': isSidebarSmall
-    }">
-        <div class="page-content content-wrap container">
-            <navbar></navbar>
-            <sidebar></sidebar>
-            <compose-email-to-adam></compose-email-to-adam>
-            <div :class="{
-                'page-inner': true,
-                'sidebar-visible': isSidebarVisible
-            }">
-                <alert-fill-all-data></alert-fill-all-data>
-                <crumbs></crumbs>
-                <div id="main-wrapper">
-                    <flash></flash>
-                    <slot></slot>
-                </div>
-            </div>
-        </div>
+    <div>
+        <slot></slot>
     </div>
 </template>
 
 <script>
-    import {mapGetters} from 'vuex'
-
-    import Navbar from '../components/Navbar'
-    import Sidebar from '../components/Sidebar'
-    import ComposeEmailToAdam from '../components/dialogs/ComposeEmailToAdam'
-    import AlertFillAllData from '../components/alert/AlertFillAllData'
-    import Crumbs from '../components/Crumbs'
-    import Flash from '../components/Flash'
-
     export default {
         name: 'default-layout',
-        components: {
-            Navbar,
-            Sidebar,
-            ComposeEmailToAdam,
-            AlertFillAllData,
-            Crumbs,
-            Flash
-        },
-        computed: mapGetters([
-            'isSidebarSmall',
-            'isSidebarVisible'
-        ]),
-        watch: {
-            $route() {
-                this.$store.commit('HIDE_SIDEBAR')
-            }
-        }
     }
 </script>
 
@@ -74,4 +30,3 @@
     @import url('../assets/css/common/blocks/navbar/navbar.css');
     @import url('../assets/css/common/level.css');
 </style>
-

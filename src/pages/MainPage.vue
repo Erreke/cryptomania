@@ -1,57 +1,48 @@
 <template>
-    <light-layout>
-        <ol>
-            <li>
-                <router-link :to="{ name: 'MainPage' }">Главная</router-link>
-            </li>
-            <li>
-                <router-link :to="{ name: 'SignInPage' }">Войти</router-link>
-            </li>
-            <li>
-                <router-link :to="{ name: 'SignUpPage' }">Регистрация</router-link>
-            </li>
-            <li>
-                <router-link :to="{ name: 'LevelOnePage' }">Уровень первый</router-link>
-            </li>
-            <li>
-                <router-link :to="{ name: 'LevelTwoPage' }">Уровень второй</router-link>
-            </li>
-            <li>
-                <router-link :to="{ name: 'LevelThreePage' }">Уровень третий</router-link>
-            </li>
-        </ol>
+  <default-layout>
+    <h1 class="title">Cryptomania.me</h1>
+    <p>Первый, самый быстрорастущий, образовательный онлайн практикум по заработку на криптовалюте с очень выгодной
+      партнерской программой в стиле бизнес-марафона</p>
 
-        <button @click="test">test</button>
+    <router-link v-if="isAuthenticated" class="btn btn-success" :to="{ name: 'EducationFirstLevelPage' }">Перейти в свой
+      кабинет
+    </router-link>
 
-    </light-layout>
+    <button class="btn btn-primary" v-if="!isAuthenticated" @click="OPEN_SIGN_IN_DIALOG">Вход в кабинет</button>
+    <button class="btn btn-success" v-if="!isAuthenticated" @click="OPEN_SIGN_UP_DIALOG">Регистрация</button>
+
+    <sign-in-dialog></sign-in-dialog>
+    <sign-up-dialog></sign-up-dialog>
+  </default-layout>
 </template>
 
 <script>
-    import LightLayout from '@/layouts/light'
+  import {mapMutations, mapGetters} from 'vuex';
 
-    export default {
-        name: 'MainPage',
-        metaInfo: {
-            title: 'Главная'
-        },
-        components: {
-            LightLayout
-        },
-        methods: {
-            test() {
-                const userId = 'iefjwef2323e';
-                const name = 'QWEQWE';
-                const imageUrl = 'WDVWVWEVWEVWE';
-                const email = 'ereke@list.ru';
+  import DefaultLayout from '@/layouts/default';
+  import SignInDialog from '@/components/SignInDialog';
+  import SignUpDialog from '@/components/SignUpDialog';
 
-                const www = window.DB.ref('users/' + userId).set({
-                    username: name,
-                    email: email,
-                    profile_picture : imageUrl
-                });
-
-                console.log(www)
-            }
-        }
-    }
+  export default {
+    name: 'MainPage',
+    metaInfo: {
+      title: 'Главная страница',
+    },
+    components: {
+      DefaultLayout,
+      SignInDialog,
+      SignUpDialog,
+    },
+    computed: {
+      ...mapGetters([
+        'isAuthenticated',
+      ]),
+    },
+    methods: {
+      ...mapMutations([
+        'OPEN_SIGN_IN_DIALOG',
+        'OPEN_SIGN_UP_DIALOG',
+      ]),
+    },
+  }
 </script>

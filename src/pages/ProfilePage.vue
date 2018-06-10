@@ -1,5 +1,5 @@
 <template>
-    <default-layout>
+    <cabinet-layout>
         <div class="row">
             <div class="col-lg-8 col-md-8">
                 <div class="panel panel-white">
@@ -63,12 +63,12 @@
 
             </div>
         </div>
-    </default-layout>
+    </cabinet-layout>
 </template>
 
 <script>
     import {mapGetters} from 'vuex'
-    import DefaultLayout from '@/layouts/default'
+    import CabinetLayout from '@/layouts/cabinet'
 
     export default {
         name: 'ProfilePage',
@@ -76,7 +76,7 @@
             title: 'Мой профиль'
         },
         components: {
-            DefaultLayout
+            CabinetLayout
         },
         computed: mapGetters([
             'loggedUser'

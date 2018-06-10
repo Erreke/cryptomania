@@ -1,5 +1,5 @@
 <template>
-    <default-layout>
+    <cabinet-layout>
         <div class="row">
             <div class="col-lg-12 col-md-12">
                 <div class="panel panel-white">
@@ -44,12 +44,12 @@
                 </div>
             </div>
         </div>
-    </default-layout>
+    </cabinet-layout>
 </template>
 
 <script>
     import {mapGetters} from 'vuex'
-    import DefaultLayout from '@/layouts/default'
+    import CabinetLayout from '@/layouts/cabinet'
 
     export default {
         name: 'ProfileEditPasswordPage',
@@ -57,7 +57,7 @@
             title: 'Изменение пароля'
         },
         components: {
-            DefaultLayout
+            CabinetLayout
         },
         data() {
             return {

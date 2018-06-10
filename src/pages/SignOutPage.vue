@@ -1,39 +1,48 @@
 <template>
-    <light-layout>
-        <div class="page-auth-content logout">
-            <p class="text-center logo-name text-lg">Выход из приложения</p>
-            <p class="text-center m-t-md">Выходим...</p>
-        </div>
-    </light-layout>
+  <light-layout>
+    <div class="sign-out">Выходим...</div>
+  </light-layout>
 </template>
 
 <script>
-    import firebase from 'firebase';
-    import LightLayout from '@/layouts/light'
+  import { mapActions } from 'vuex';
+  import LightLayout from '@/layouts/light'
 
-    export default {
-        name: 'SignOutPage',
-        metaInfo: {
-            title: 'Выход'
-        },
-        components: {
-            LightLayout
-        },
-        mounted() {
-            firebase.auth().signOut().then(() => {
-                this.$router.push({name: 'MainPage'})
-            }).catch((error) => {
-                console.log(error)
-            });
-        }
+  export default {
+    name: 'SignOutPage',
+
+    metaInfo: {
+      title: 'Выход'
+    },
+
+    components: {
+      LightLayout
+    },
+
+    methods: {
+      ...mapActions({
+        signOutRequest: 'SIGN_OUT_REQUEST'
+      }),
+      signOut() {
+        this.signOutRequest()
+          .then(() => {
+            this.$router.push({name: 'MainPage'});
+          });
+      },
+    },
+
+    mounted() {
+      this.signOut();
     }
+  }
 </script>
 
 <style>
-    .logout {
-        background-image: url(../assets/i/blocks/loader/loader_type_step-saving.svg);
-        background-position: 50% 130px;
-        background-repeat: no-repeat;
-        padding-bottom: 100px;
-    }
+  .sign-out {
+    background: url(../assets/i/blocks/loader/loader_type_step-saving.svg) 50% 100% no-repeat;
+    padding: 150px 0 50px;
+    text-align: center;
+    line-height: 70px;
+    font-size: 37px;
+  }
 </style>

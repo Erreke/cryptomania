@@ -1,5 +1,5 @@
 <template>
-    <default-layout>
+    <cabinet-layout>
         <div class="row">
             <div class="col-xs-12 col-md-5 col-lg-5">
                 <div class="avatar-container" :style="{ backgroundImage: `url(${avatarImage})` }" v-if="avatarImage"></div>
@@ -26,12 +26,12 @@
                 <router-link v-if="isAvatarSelectedToUpload" :to="{ name: 'ProfilePage' }" class="btn btn-danger">Отмена</router-link>
             </div>
         </div>
-    </default-layout>
+    </cabinet-layout>
 </template>
 
 <script>
     import {mapGetters} from 'vuex'
-    import DefaultLayout from '@/layouts/default'
+    import CabinetLayout from '@/layouts/cabinet'
 
     export default {
         name: 'ProfileEditAvatarPage',
@@ -39,7 +39,7 @@
             title: 'Изменение аватара'
         },
         components: {
-            DefaultLayout
+            CabinetLayout
         },
         data() {
             return {

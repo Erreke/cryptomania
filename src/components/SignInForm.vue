@@ -1,82 +1,75 @@
 <template>
-    <form class="m-t-md" @submit.prevent="handleSubmit">
+  <form class="m-t-md" @submit.prevent="handleSubmit">
 
 
-        <div class="form-group">
-            <label for="email">E-mail:</label>
-            <input type="email" class="form-control mt1" placeholder="Введи свой емейл" name="email" id="email" v-model="email" required>
-        </div>
+    <div class="form-group">
+      <label for="sign-in-email">E-mail:</label>
+      <input type="email" class="form-control mt1" placeholder="Введи свой емейл" name="email" id="sign-in-email"
+             v-model="email" autocomplete="email" required>
+    </div>
 
-        <div class="form-group">
-            <label for="password">Пароль:</label>
-            <input type="password" class="form-control mt1" placeholder="Введи свой пароль" name="password" id="password" v-model="password" required>
-        </div>
+    <div class="form-group">
+      <label for="sign-in-password">Пароль:</label>
+      <input type="password" class="form-control mt1" placeholder="Введи свой пароль" name="password"
+             id="sign-in-password" v-model="password" autocomplete="current-password" required>
+    </div>
 
-        <div class="form-group">
-            <button type="submit" :class="{'btn btn-success btn-block': true, 'ajax-loading': isAuthorizationProcess}">Войти</button>
-        </div>
+    <div class="form-group" v-if="signInError">
+      <p class="text-danger">{{ signInError }}</p>
+    </div>
 
-        <router-link :to="{ name: 'ProfileResetPasswordPage' }" class="display-block text-center m-t-md">Забыл пароль?</router-link>
+    <div class="form-group">
+      <button type="submit" :class="{'btn btn-success btn-block': true, 'ajax-loading': isSignInProcess}">Войти
+      </button>
+    </div>
 
-        <hr>
+    <router-link :to="{ name: 'PasswordResetPage' }" class="display-block text-center m-t-md">Забыл пароль?
+    </router-link>
 
-        <div class="form-group">
-            <h4 class="text-center">Ты еще не участвуешь в проекте?</h4>
-            <router-link :to="{ name: 'SignUpPage' }" class="btn btn-primary btn-block m-t-md ">Создай свой профиль</router-link>
-        </div>
-    </form>
+    <hr>
+
+    <div class="form-group">
+      <h4 class="text-center">Ты еще не участвуешь в проекте?</h4>
+      <router-link :to="{ name: 'SignUpPage' }" class="btn btn-primary btn-block m-t-md ">Создай свой профиль
+      </router-link>
+    </div>
+  </form>
 </template>
 
 
 <script>
-    import firebase from 'firebase';
-    import {mapGetters} from 'vuex';
-    import {showErrors} from './SweetAlerts';
+  import { mapState, mapActions } from 'vuex';
 
-    export default {
-        name: 'sign-in-form',
-        data() {
-            return {
-                email: '',
-                password: ''
-            }
-        },
-        computed: mapGetters([
-            'isAuthorizationProcess'
-        ]),
-        methods: {
-            handleSubmit() {
-                this.$store.commit('SET_AUTHORIZATION_PROCESS', true);
+  export default {
+    name: 'sign-in-form',
 
-                firebase.auth().signInWithEmailAndPassword(this.email, this.password)
-                    .then(() => {
-                        this.$store.commit('SET_AUTHORIZATION_PROCESS', false);
-                        this.$router.push({name: 'LevelOnePage'});
+    data() {
+      return {
+        email: '',
+        password: '',
+      }
+    },
 
-                    })
-                    .catch((error) => {
-                        this.$store.commit('SET_AUTHORIZATION_PROCESS', false);
+    computed: {
+      ...mapState({
+        isSignInProcess: state => state.auth.isSignInProcess,
+        signInError: state => state.auth.signInError,
+      }),
+    },
 
-                        switch (error.code) {
-
-                            case 'auth/wrong-password':
-                                showErrors(this, 'Не правильный логин или пароль...');
-                                break;
-
-                            case 'auth/user-not-found':
-                                showErrors(this, 'Пользователь с такой электронной почтой не найден...');
-                                break;
-
-                            case 'auth/user-disabled':
-                                showErrors(this, 'Пользователь заблокирован...');
-                                break;
-
-                            default:
-                                showErrors(this, 'Произошла неизвестная ошибка...');
-                                break;
-                        }
-                    });
-            }
-        }
-    }
+    methods: {
+      ...mapActions({
+        signInRequest: 'SIGN_IN_REQUEST'
+      }),
+      handleSubmit() {
+        this.signInRequest({
+          email: this.email,
+          password: this.password
+        })
+          .then(() => {
+            this.$router.push({name: 'EducationFirstLevelPage'});
+          });
+      },
+    },
+  }
 </script>
