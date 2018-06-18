@@ -3,7 +3,7 @@
         <div class="page-inner" style="min-height:931px !important">
             <div id="main-wrapper">
                 <div class="row">
-                    <div class="col-md-3 center">
+                    <div class="col-md-6 center">
 
                         <slot></slot>
 

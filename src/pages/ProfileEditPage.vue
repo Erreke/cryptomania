@@ -139,20 +139,6 @@
                   </div>
 
                   <div class="form-group">
-                    <label for="google">Ссылка профиля в Google+:</label>
-                    <input
-                      autocomplete="url"
-                      type="text"
-                      class="form-control"
-                      name="google"
-                      id="google"
-                      placeholder="Например, https://google.com/john.snow"
-                      :value="loggedUser.google"
-                      @input="this.PREPARE_USER_INFO_FOR_SAVE"
-                    />
-                  </div>
-
-                  <div class="form-group">
                     <label for="twitter">Ссылка профиля в Twitter:</label>
                     <input
                       autocomplete="url"
@@ -176,7 +162,6 @@
                       class="btn btn-danger m-t-xs m-r-xs col-md-4">Отмена</router-link>
                     <button
                       type="submit"
-                      v-bind:disabled="isProfileNotReadyToSave"
                       :class="{
                           'btn btn-success m-t-xs col-md-4': true,
                           'user-profile-button-saving': isUserProfileSavingProcess
@@ -197,7 +182,6 @@
 <script>
   import { mapActions, mapMutations, mapGetters } from 'vuex'
   import CabinetLayout from '@/layouts/cabinet'
-  import db from '../firebase/init';
 
   export default {
     name: 'ProfileEditPage',
@@ -218,24 +202,11 @@
       ])
     },
 
-    firestore() {
-      return {
-        users: db.collection('users'),
-      }
-    },
-
     methods: {
       ...mapMutations([
         'PREPARE_USER_INFO_FOR_SAVE'
       ]),
       handleUpdateUserInfo() {
-
-        this.$firestore.users.add(
-          {
-            name: this.loggedUser.firstName,
-            timestamp: new Date()
-          }
-        );
         // this.$store.dispatch('UPDATE_USER_INFO')
       }
     }

@@ -17,7 +17,7 @@
 </template>
 
 <script>
-  import {mapMutations, mapGetters} from 'vuex';
+  import { mapMutations, mapGetters } from 'vuex';
 
   import DefaultLayout from '@/layouts/default';
   import SignInDialog from '@/components/SignInDialog';
@@ -25,21 +25,25 @@
 
   export default {
     name: 'MainPage',
+
     metaInfo: {
       title: 'Главная страница',
     },
+
     components: {
       DefaultLayout,
       SignInDialog,
       SignUpDialog,
     },
+
     computed: {
-      ...mapGetters([
+      ...mapGetters('user', [
         'isAuthenticated',
       ]),
     },
+
     methods: {
-      ...mapMutations([
+      ...mapMutations('auth', [
         'OPEN_SIGN_IN_DIALOG',
         'OPEN_SIGN_UP_DIALOG',
       ]),

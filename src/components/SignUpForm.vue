@@ -50,14 +50,14 @@
     },
 
     computed: {
-      ...mapState({
-        isSignUpProcess: state => state.auth.isSignUpProcess,
-        signUpError: state => state.auth.signUpError,
+      ...mapState('auth', {
+        isSignUpProcess: state => state.isSignUpProcess,
+        signUpError: state => state.signUpError,
       }),
     },
 
     methods: {
-      ...mapActions({
+      ...mapActions('auth', {
         signUpRequest: 'SIGN_UP_REQUEST',
       }),
       handleSubmit() {

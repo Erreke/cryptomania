@@ -10,7 +10,7 @@ import FinancePage from '@/pages/TEMP_PAGE'
 
 import EducationFirstLevelPage from '@/pages/EducationFirstLevelPage'
 import EducationSecondLevelPage from '@/pages/EducationSecondLevelPage'
-import EducationKnowledgeBasePage from '@/pages/TEMP_PAGE'
+import EducationKnowledgeBasePage from '@/pages/EducationKnowledgeBasePage'
 
 import TeamPage from '@/pages/TEMP_PAGE'
 import SupportPage from '@/pages/TEMP_PAGE'

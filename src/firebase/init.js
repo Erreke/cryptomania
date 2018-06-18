@@ -1,7 +1,7 @@
 import firebase from 'firebase';
-import firestore from 'firebase/firestore';
+import 'firebase/firestore';
 
-const db = firebase.initializeApp({
+const firestoreApp = firebase.initializeApp({
   apiKey: 'AIzaSyA6qbciWron2B7KIMw2Vsx0_PTDoCxxM0k',
   authDomain: 'cryptomania-4320b.firebaseapp.com',
   databaseURL: 'https://cryptomania-4320b.firebaseio.com',
@@ -10,4 +10,14 @@ const db = firebase.initializeApp({
   messagingSenderId: '560475980939'
 });
 
-export default db.firestore();
+const firestore = firestoreApp.firestore();
+
+const settings = {
+  timestampsInSnapshots: true
+};
+
+firestore.settings(settings);
+
+window.$firestore = firestore;
+
+export default firestore;

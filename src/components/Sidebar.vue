@@ -83,9 +83,11 @@
 </template>
 
 <script>
-  import {mapState, mapGetters, mapMutations} from 'vuex'
+  import { mapState, mapGetters, mapMutations } from 'vuex'
 
   export default {
+    name: 'SideBar',
+
     data() {
       return {
         educationRoutes: [
@@ -95,25 +97,26 @@
         ]
       }
     },
+
     computed: {
-      ...mapState([
+      ...mapState('ui', [
         'isMenuItemEducationOpened',
-      ]),
-      ...mapGetters([
-        'loggedUser',
         'isSidebarVisible',
+      ]),
+      ...mapGetters('user', [
+        'loggedUser',
       ]),
       isEducationItemsActive() {
         return this.educationRoutes.includes(this.$route.name);
       },
     },
+
     methods: {
-      ...mapMutations({
+      ...mapMutations('ui', {
         toggleMenuItemEducation: 'TOGGLE_MENU_ITEM_EDUCATION'
       }),
     },
-
-  }
+  };
 </script>
 
 <style>

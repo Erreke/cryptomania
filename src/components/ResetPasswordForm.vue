@@ -41,15 +41,15 @@
     },
 
     computed: {
-      ...mapState({
-        isPasswordResetProcess: state => state.auth.isPasswordResetProcess,
-        passwordResetError: state => state.auth.passwordResetError,
-        passwordResetMessage: state => state.auth.passwordResetMessage,
+      ...mapState('auth', {
+        isPasswordResetProcess: state => state.isPasswordResetProcess,
+        passwordResetError: state => state.passwordResetError,
+        passwordResetMessage: state => state.passwordResetMessage,
       }),
     },
 
     methods: {
-      ...mapActions({
+      ...mapActions('auth', {
         passwordResetRequest: 'PASSWORD_RESET_REQUEST'
       }),
       handleSubmit() {

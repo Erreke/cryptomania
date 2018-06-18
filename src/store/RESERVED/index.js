@@ -1,21 +1,25 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import state from './state'
+import actions from './actions'
+import mutations from './mutations'
+import getters from './getters'
 
 import moduleAuth from './modules/auth';
-import moduleEducation from './modules/education';
 import moduleUser from './modules/user';
-import moduleUI from './modules/ui';
 
 Vue.use(Vuex);
 
 const debug = process.env.NODE_ENV !== 'production';
 
-export default new Vuex.Store({
+export const store = new Vuex.Store({
+  state,
+  actions,
+  mutations,
+  getters,
   strict: debug,
   modules: {
     auth: moduleAuth,
-    education: moduleEducation,
     user: moduleUser,
-    ui: moduleUI,
-  },
+  }
 });

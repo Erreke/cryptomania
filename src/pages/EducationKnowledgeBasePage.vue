@@ -1,20 +1,20 @@
 <template>
   <cabinet-layout>
     <div class="row">
-      <div class="col-sm-12 col-lg-12" v-if="firstLevelStepsCount">
+      <div class="col-sm-12 col-lg-12" v-if="secondLevelStepsCount">
         <progressbar
           v-if="loggedUser"
-          :steps="firstLevelSteps"
-          :steps-count="firstLevelStepsCount"
-          :done-step="loggedUser.firstLevelStep"
-          level-ordinal-number="Первый"
+          :steps="knowledgeBase"
+          :steps-count="secondLevelStepsCount"
+          :done-step="loggedUser.secondLevelStep"
+          level-ordinal-number="Второй"
         />
 
         <level-steps
           v-if="loggedUser"
-          :steps="firstLevelSteps"
-          :steps-count="firstLevelStepsCount"
-          :done-step="loggedUser.firstLevelStep"
+          :steps="knowledgeBase"
+          :steps-count="secondLevelStepsCount"
+          :done-step="loggedUser.secondLevelStep"
         />
       </div>
 
@@ -32,10 +32,10 @@
   import LevelSteps from '@/components/LevelSteps'
 
   export default {
-    name: 'EducationFirstLevelPage',
+    name: 'EducationKnowledgeBasePage',
 
     metaInfo: {
-      title: 'Первый уровень'
+      title: 'База знаний'
     },
 
     components: {
@@ -49,10 +49,10 @@
         'loggedUser',
       ]),
       ...mapState('education', [
-        'firstLevelSteps',
+        'knowledgeBase',
       ]),
       ...mapGetters('education', [
-        'firstLevelStepsCount'
+        'secondLevelStepsCount'
       ]),
     },
 
@@ -61,16 +61,16 @@
         'SET_CURRENT_LEVEL'
       ]),
       ...mapActions('education', {
-        initFirstLevelSteps: 'INIT_FIRST_LEVEL_STEPS',
+        initSecondLevelSteps: 'INIT_SECOND_LEVEL_STEPS',
       }),
     },
 
     created() {
-      this.initFirstLevelSteps();
+      this.initSecondLevelSteps();
     },
 
     mounted: function () {
-      //this.$nextTick(this.SET_CURRENT_LEVEL('first'));
+      //this.$nextTick(this.SET_CURRENT_LEVEL('second'));
       //this.$nextTick(this.CLOSE_SIGN_IN_DIALOG);
     },
   }

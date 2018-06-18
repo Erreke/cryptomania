@@ -4,14 +4,30 @@
 
     <div class="form-group">
       <label for="sign-in-email">E-mail:</label>
-      <input type="email" class="form-control mt1" placeholder="Введи свой емейл" name="email" id="sign-in-email"
-             v-model="email" autocomplete="email" required>
+      <input
+        type="email"
+        class="form-control mt1"
+        placeholder="Введи свой емейл"
+        name="email"
+        id="sign-in-email"
+        v-model="email"
+        autocomplete="email"
+        required
+      />
     </div>
 
     <div class="form-group">
       <label for="sign-in-password">Пароль:</label>
-      <input type="password" class="form-control mt1" placeholder="Введи свой пароль" name="password"
-             id="sign-in-password" v-model="password" autocomplete="current-password" required>
+      <input
+        type="password"
+        class="form-control mt1"
+        placeholder="Введи свой пароль"
+        name="password"
+        id="sign-in-password"
+        v-model="password"
+        autocomplete="current-password"
+        required
+      />
     </div>
 
     <div class="form-group" v-if="signInError">
@@ -19,19 +35,16 @@
     </div>
 
     <div class="form-group">
-      <button type="submit" :class="{'btn btn-success btn-block': true, 'ajax-loading': isSignInProcess}">Войти
-      </button>
+      <button type="submit" :class="{'btn btn-success btn-block': true, 'ajax-loading': isSignInProcess}">Войти</button>
     </div>
 
-    <router-link :to="{ name: 'PasswordResetPage' }" class="display-block text-center m-t-md">Забыл пароль?
-    </router-link>
+    <router-link :to="{ name: 'PasswordResetPage' }" class="display-block text-center m-t-md">Забыл пароль?</router-link>
 
     <hr>
 
     <div class="form-group">
-      <h4 class="text-center">Ты еще не участвуешь в проекте?</h4>
-      <router-link :to="{ name: 'SignUpPage' }" class="btn btn-primary btn-block m-t-md ">Создай свой профиль
-      </router-link>
+      <p class="text-center m-t-xs text-sm">Ты еще не участвуешь в проекте?</p>
+      <router-link :to="{ name: 'SignUpPage' }" class="btn btn-default btn-block m-t-md ">Создай свой профиль</router-link>
     </div>
   </form>
 </template>
@@ -51,14 +64,14 @@
     },
 
     computed: {
-      ...mapState({
-        isSignInProcess: state => state.auth.isSignInProcess,
-        signInError: state => state.auth.signInError,
+      ...mapState('auth', {
+        isSignInProcess: state => state.isSignInProcess,
+        signInError: state => state.signInError,
       }),
     },
 
     methods: {
-      ...mapActions({
+      ...mapActions('auth', {
         signInRequest: 'SIGN_IN_REQUEST'
       }),
       handleSubmit() {

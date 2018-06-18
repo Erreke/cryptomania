@@ -1,7 +1,5 @@
 export default {
-  SET_FIRST_LEVEL_STEPS: (state, isSaving) => (
-    state.firstLevelSteps = isSaving
-  ),
+
 
   SET_USER_PROFILE_SAVING_PROCESS_STATUS: (state, isSaving) => (
     state.isUserProfileSavingProcess = isSaving

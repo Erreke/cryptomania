@@ -20,7 +20,7 @@
     },
 
     methods: {
-      ...mapActions({
+      ...mapActions('auth', {
         signOutRequest: 'SIGN_OUT_REQUEST'
       }),
       signOut() {
